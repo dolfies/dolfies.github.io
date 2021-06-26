@@ -1,47 +1,51 @@
-@function multiple-shadow($length){
-    $value: 2px -1px 0 #000;
-    @for $i from 2 through $length{
-        $ho: $i * 2;
-        $vo: -#{$ho / 2};
-        $col: hsl(0deg, 0%, $i * 2%);
-        $value: $value, #{$ho}px #{$vo}px 0 $col
-    }
-    @return $value;
+body {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: center;
 }
 
-body{
-    @include _flexbox($n, $rw, $n, $c)
+div {
+  width: 100%;
+  text-align: center;
 }
 
-div{
-    width: 100%;
-    text-align: $c
+.number {
+  background: #fff;
+  position: relative;
+  font: 900 30vmin "Consolas";
+  letter-spacing: 5vmin;
+  text-shadow: 2px -1px 0 #000, 4px -2px 0 #0a0a0a, 6px -3px 0 #0f0f0f, 8px -4px 0 #141414, 10px -5px 0 #1a1a1a, 12px -6px 0 #1f1f1f, 14px -7px 0 #242424, 16px -8px 0 #292929;
+}
+.number::before {
+  background-color: #673ab7;
+  background-image: radial-gradient(closest-side at 50% 50%, #ffc107 100%, rgba(0, 0, 0, 0)), radial-gradient(closest-side at 50% 50%, #e91e63 100%, rgba(0, 0, 0, 0));
+  background-repeat: repeat-x;
+  background-size: 40vmin 40vmin;
+  background-position: -100vmin 20vmin, 100vmin -25vmin;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+  -webkit-animation: moving 10s linear infinite both;
+          animation: moving 10s linear infinite both;
+  display: block;
+  position: absolute;
+  content: "";
+}
+@-webkit-keyframes moving {
+  to {
+    background-position: 100vmin 20vmin, -100vmin -25vmin;
+  }
+}
+@keyframes moving {
+  to {
+    background-position: 100vmin 20vmin, -100vmin -25vmin;
+  }
 }
 
-.number{
-    background: #fff;
-    position: $rl;
-    font: 900 30vmin 'Consolas';
-    letter-spacing: 5vmin;
-    text-shadow: multiple-shadow(8);
-    @include _pseudo-uncomplete($bf, $bl){
-        background-color: #673ab7;
-        background-image: radial-gradient(closest-side at 50% 50%, #ffc107 100%, rgba(0, 0, 0, 0)),
-                          radial-gradient(closest-side at 50% 50%, #e91e63 100%, rgba(0, 0, 0, 0));
-        background-repeat: $rpx;
-        background-size: 40vmin 40vmin;
-        background-position: -100vmin 20vmin, 100vmin -25vmin;
-        @include _dimension(100%);
-        mix-blend-mode: screen;
-        @include _animation(moving, 10s linear infinite both, to){
-            background-position: 100vmin 20vmin, -100vmin -25vmin
-        }
-    }
+.text {
+  font: 400 5vmin "Courgette";
 }
-
-.text{
-    @include _text($n, 400 5vmin 'Courgette', $n);
-    span{
-        font-size: 10vmin
-    }
+.text span {
+  font-size: 10vmin;
 }
